@@ -12,7 +12,7 @@ import DataGrid from 'react-data-grid';
       }
   
       render(): React.ReactNode {
-          return <DataGrid columns={this.props.columns} rows={this.props.columns} />;
+          return <DataGrid columns={this.props.columns} rows={this.props.rows} />;
       }
   }
   
