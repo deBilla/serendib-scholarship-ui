@@ -4,11 +4,11 @@ import ModalButtonComponent from '../../components/ModalButtonCompnent';
 
 const columns = [
     {
-        key: 'id', name: 'ID',
+        key: 'id', name: 'ID', width: 10,
         formatter(props: any) {
             return (
                 <>
-                    <ModalButtonComponent studentId={props.row.name} />
+                    <ModalButtonComponent studentId={props.row.id} />
                 </>
             );
         },

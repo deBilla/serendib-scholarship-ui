@@ -3,7 +3,8 @@ import { Button } from 'react-bootstrap';
 import StudentModalComponent from './StudentModalComponent/StudentModalComponent';
 
 interface ModalButtonCompnentProps {
-    studentId: string
+    studentId: string,
+    
 }
 
 export default class ModalButtonComponent extends Component<ModalButtonCompnentProps, { show: boolean }> {
@@ -22,7 +23,7 @@ export default class ModalButtonComponent extends Component<ModalButtonCompnentP
 
     render(): React.ReactNode {
         return <>
-            <Button onClick={() => this.setModalShow(true)}>Click</Button>
+            <Button onClick={() => this.setModalShow(true)}>{this.props.studentId}</Button>
             <StudentModalComponent show={this.state.show} onHide={() => this.setModalShow(false)} studentId = {this.props.studentId} />
         </>
     }

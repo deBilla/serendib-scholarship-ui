@@ -22,7 +22,7 @@ export default class DataTableComponent extends Component<DataTableProps> {
     }
 
     render(): React.ReactNode {
-        return <DataGrid columns={this.props.columns} rows={this.props.rows} />;
+        return <DataGrid style={{height: '100vh'}} columns={this.props.columns} rows={this.props.rows} />;
     }
 }
   
