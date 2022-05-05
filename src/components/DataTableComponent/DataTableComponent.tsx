@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
 import DataGrid from 'react-data-grid';
 
-  interface DataTableProps {
-      columns: any,
-      rows: any
-  }
+interface DataTableProps {
+    columns: columnType[],
+    rows: rowType[]
+}
+
+interface columnType {
+    key: string;
+    name: string;
+};
+
+interface rowType {
+    id: number;
+    name: string;
+};
   
-  export default class DataTableComponent extends Component<DataTableProps> {
-      constructor(props: DataTableProps) {
-          super(props);
-      }
-  
-      render(): React.ReactNode {
-          return <DataGrid columns={this.props.columns} rows={this.props.rows} />;
-      }
-  }
+export default class DataTableComponent extends Component<DataTableProps> {
+    constructor(props: DataTableProps) {
+        super(props);
+    }
+
+    render(): React.ReactNode {
+        return <DataGrid columns={this.props.columns} rows={this.props.rows} />;
+    }
+}
   

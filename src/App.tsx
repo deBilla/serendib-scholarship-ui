@@ -1,10 +1,7 @@
-import React from 'react';
-import StudentTableContainer from './containers/stduentDetailsContainer/StduentDetailsContainer';
+import LandingContainer from "./containers/LandingContainer/LandingContainer";
 
 export default function App() {
   return (
-    <>
-      <StudentTableContainer />;
-    </>
+    <LandingContainer />
   );
 }
