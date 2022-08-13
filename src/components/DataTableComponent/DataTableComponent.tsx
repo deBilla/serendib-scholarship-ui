@@ -6,12 +6,12 @@ interface DataTableProps {
     rows: rowType[]
 }
 
-interface columnType {
+type columnType = {
     key: string;
     name: string;
 };
 
-interface rowType {
+type rowType = {
     id: number;
     name: string;
 };
@@ -25,4 +25,3 @@ export default class DataTableComponent extends Component<DataTableProps> {
         return <DataGrid style={{height: '100vh'}} columns={this.props.columns} rows={this.props.rows} />;
     }
 }
-  

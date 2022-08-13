@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DataTableComponent from '../../components/DataTableComponent/DataTableComponent';
-import ModalButtonComponent from '../../components/ModalButtonCompnent';
+import StudentModalButton from '../../components/StudentModalButton/StudentModalButton';
 
 const columns = [
     {
@@ -8,7 +8,7 @@ const columns = [
         formatter(props: any) {
             return (
                 <>
-                    <ModalButtonComponent studentId={props.row.id} />
+                    <StudentModalButton studentId={props.row.id} />
                 </>
             );
         },
@@ -29,11 +29,7 @@ const rows = [
     { id: 1, name: 'Demo' }
 ];
 
-export default class StudentTableContainer extends Component {
-    openPopup() {
-        console.error("dimuthu");
-    }
-
+export default class StudentTableComponent extends Component {
     render(): React.ReactNode {
         return <DataTableComponent columns={columns} rows={rows} />;
     }

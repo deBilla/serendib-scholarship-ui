@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-
 interface ModalPropType {
     show: boolean,
-    studentId: string,
+    studentid: string,
     onHide(): void
 }
-
 
 export default class StudentModalComponent extends Component<ModalPropType> {
     constructor(props: ModalPropType) {
@@ -18,7 +16,7 @@ export default class StudentModalComponent extends Component<ModalPropType> {
         return <Modal {...this.props}>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Details of Student {this.props.studentId}
+                    Details of Student {this.props.studentid}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>

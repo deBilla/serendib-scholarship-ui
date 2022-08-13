@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import StudentTableContainer from '../stduentDetailsContainer/StduentDetailsContainer';
+import StudentTableComponent from '../../components/StudentTableComponent/StudentTableComponent';
 import { Navbar, Container, Nav, Button, Tab, Col, Row } from 'react-bootstrap';
 
 interface LandingContainerProp { }
@@ -34,10 +34,10 @@ export default class LandingContainer extends Component<LandingContainerProp> {
                         <Col sm={11}>
                             <Tab.Content>
                                 <Tab.Pane eventKey="first">
-                                    <StudentTableContainer />
+                                    <StudentTableComponent />
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="second">
-                                    <StudentTableContainer />
+                                    <StudentTableComponent />
                                 </Tab.Pane>
                             </Tab.Content>
                         </Col>

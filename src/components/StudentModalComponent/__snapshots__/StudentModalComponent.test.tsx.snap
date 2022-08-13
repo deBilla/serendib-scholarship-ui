@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StudentModalComponent not renders 1`] = `<div />`;
+
+exports[`StudentModalComponent renders 1`] = `<div />`;

@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StudentTableComponent renders 1`] = `
+<div>
+  <div
+    aria-colcount="10"
+    aria-rowcount="3"
+    class="rdg r104f42s700-beta15"
+    dir="ltr"
+    role="grid"
+    style="height: 100vh; grid-template-rows: 35px repeat(2, 35px); --rdg-header-row-height: 35px; --rdg-summary-row-height: 35px; --rdg-sign: 1; grid-template-columns: 80px 80px 80px 80px 80px 80px 80px 80px 80px 80px;"
+  >
+    <div
+      aria-rowindex="1"
+      class="rdg-header-row h197vzie700-beta15"
+      role="row"
+      style="--rdg-grid-row-start: 1;"
+    >
+      <div
+        aria-colindex="1"
+        aria-selected="false"
+        class="rdg-cell c1wupbe700-beta15"
+        role="columnheader"
+        style="grid-column-start: 1; min-width: 80px;"
+        tabindex="0"
+      >
+        ID
+      </div>
+      <div
+        aria-colindex="2"
+        aria-selected="false"
+        class="rdg-cell c1wupbe700-beta15"
+        role="columnheader"
+        style="grid-column-start: 2; min-width: 80px;"
+        tabindex="-1"
+      >
+        Name
+      </div>
+    </div>
+    <div
+      aria-rowindex="2"
+      class="rdg-row r1otpg64700-beta15 rdg-row-even"
+      role="row"
+      style="--rdg-grid-row-start: 2; --rdg-row-height: 35px;"
+    >
+      <div
+        aria-colindex="1"
+        aria-readonly="true"
+        aria-selected="false"
+        class="rdg-cell c1wupbe700-beta15"
+        role="gridcell"
+        style="grid-column-start: 1;"
+        tabindex="-1"
+      >
+        <button
+          class="btn btn-primary"
+          type="button"
+        >
+          0
+        </button>
+      </div>
+      <div
+        aria-colindex="2"
+        aria-readonly="true"
+        aria-selected="false"
+        class="rdg-cell c1wupbe700-beta15"
+        role="gridcell"
+        style="grid-column-start: 2;"
+        tabindex="-1"
+      >
+        Example
+      </div>
+    </div>
+    <div
+      aria-rowindex="3"
+      class="rdg-row r1otpg64700-beta15 rdg-row-odd"
+      role="row"
+      style="--rdg-grid-row-start: 3; --rdg-row-height: 35px;"
+    >
+      <div
+        aria-colindex="1"
+        aria-readonly="true"
+        aria-selected="false"
+        class="rdg-cell c1wupbe700-beta15"
+        role="gridcell"
+        style="grid-column-start: 1;"
+        tabindex="-1"
+      >
+        <button
+          class="btn btn-primary"
+          type="button"
+        >
+          1
+        </button>
+      </div>
+      <div
+        aria-colindex="2"
+        aria-readonly="true"
+        aria-selected="false"
+        class="rdg-cell c1wupbe700-beta15"
+        role="gridcell"
+        style="grid-column-start: 2;"
+        tabindex="-1"
+      >
+        Demo
+      </div>
+    </div>
+  </div>
+</div>
+`;
