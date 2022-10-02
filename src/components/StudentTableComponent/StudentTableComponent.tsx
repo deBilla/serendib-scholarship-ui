@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import { render } from '@testing-library/react';
+import React from 'react';
 import DataTableComponent from '../../components/DataTableComponent/DataTableComponent';
 import StudentModalButton from '../../components/StudentModalButton/StudentModalButton';
 
@@ -29,8 +30,14 @@ const rows = [
     { id: 1, name: 'Demo' }
 ];
 
+<<<<<<< Updated upstream:src/components/StudentTableComponent/StudentTableComponent.tsx
 export default class StudentTableComponent extends Component {
     render(): React.ReactNode {
         return <DataTableComponent columns={columns} rows={rows} />;
     }
 }
+=======
+export default function StudentTableContainer() {
+    return (<DataTableComponent columns={columns} rows={rows} />);
+}
+>>>>>>> Stashed changes:src/containers/stduentDetailsContainer/StduentDetailsContainer.tsx
