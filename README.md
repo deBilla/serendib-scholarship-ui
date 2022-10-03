@@ -7,7 +7,9 @@ https://medium.com/@billa-code/list/react-with-typescript-seriescharity-web-app-
 ## Setting up the local env
 `
 npm i
+
 npm run test
+
 npm start
 `
 
