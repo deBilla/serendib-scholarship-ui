@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { withForm } from "../hoc/withForm";
 
-interface ModalPropType {
+export type StudentPropType = {
     show: boolean,
+    form: any,
     studentid: string,
+    config: any,
     onHide(): void
 }
 
-export default class StudentModalComponent extends Component<ModalPropType> {
-    constructor(props: ModalPropType) {
+class StudentModalComponent extends Component<StudentPropType> {
+    constructor(props: StudentPropType) {
         super(props);
     }
 
     render(): React.ReactNode {
-        return <Modal {...this.props}>
-            <Modal.Header closeButton>
+        return <Modal show={this.props.show}>
+            <Modal.Header closeButton onClick={this.props.onHide}>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Details of Student {this.props.studentid}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-
+                {this.props.form}
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={this.props.onHide}>Save</Button>
@@ -30,3 +33,5 @@ export default class StudentModalComponent extends Component<ModalPropType> {
         </Modal>
     }
 }
+
+export default withForm(StudentModalComponent);

@@ -9,7 +9,7 @@ const columns = [
         formatter(props: any) {
             return (
                 <>
-                    <StudentModalButton studentId={props.row.id} />
+                    <StudentModalButton detail={props.row} studentId={props.row.id} />
                 </>
             );
         },
@@ -30,14 +30,6 @@ const rows = [
     { id: 1, name: 'Demo' }
 ];
 
-<<<<<<< Updated upstream:src/components/StudentTableComponent/StudentTableComponent.tsx
-export default class StudentTableComponent extends Component {
-    render(): React.ReactNode {
-        return <DataTableComponent columns={columns} rows={rows} />;
-    }
-}
-=======
 export default function StudentTableContainer() {
     return (<DataTableComponent columns={columns} rows={rows} />);
 }
->>>>>>> Stashed changes:src/containers/stduentDetailsContainer/StduentDetailsContainer.tsx
