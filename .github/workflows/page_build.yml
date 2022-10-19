@@ -1,14 +1,11 @@
 name: React Build
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
     
 env:
   CI: false
-  GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
 
 jobs:
   build:
@@ -45,3 +42,5 @@ jobs:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v1
+      env:  
+        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
