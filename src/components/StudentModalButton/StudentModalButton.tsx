@@ -21,7 +21,10 @@ export default class StudentModalButton extends Component<StudentModalButtonComp
             let obj = {
                 label: valArr[0],
                 value: valArr[1],
-                type: 'text'
+                type: 'text',
+                onChange: (e: any) => {
+                    this.setConfigState(e.target.value, i);
+                }
             }
 
             config.push(obj);
@@ -33,15 +36,24 @@ export default class StudentModalButton extends Component<StudentModalButtonComp
         };
     }
 
+    setConfigState(value: any, i: any) {
+        let arr = [...this.state.config];
+        arr[i].value = value;
+        this.setState({ config: arr });
+    }
+
     setModalShow(showState: boolean) {
         this.setState({ show: showState });
     }
 
+    saveData() {
+        console.log(this.state.config);
+    }
 
     render(): React.ReactNode {
         return <>
             <Button onClick={() => this.setModalShow(true)}>{this.props.studentId}</Button>
-            <StudentModalComponent config={this.state.config} show={this.state.show} onHide={() => this.setModalShow(false)} studentid = {this.props.studentId} />
+            <StudentModalComponent config={this.state.config} show={this.state.show} onHide={() => this.setModalShow(false)} onSave={() => this.saveData()} studentid = {this.props.studentId} />
         </>
     }
 }

@@ -21,13 +21,13 @@ const columns = [
     { key: 'course', name: 'Course of Study' },
     { key: 'startDate', name: 'Course Start Date' },
     { key: 'endDate', name: 'Course End Date' },
-    { key: 'scholEndDate', name: 'Schol. start Date' },
+    { key: 'schoolEndDate', name: 'Schol. start Date' },
     { key: 'sponsor', name: 'Sponsor Name' }
 ];
 
 const rows = [
-    { id: 0, name: 'Example' },
-    { id: 1, name: 'Demo' }
+    { id: 0, name: 'Example', contactNo: '', email: '', university: '', course: '', startDate: '', endDate: '', schoolEndDate: '', sponsor: '' },
+    { id: 1, name: 'Demo', contactNo: '', email: '', university: '', course: '', startDate: '', endDate: '', schoolEndDate: '', sponsor: '' }
 ];
 
 export default function StudentTableContainer() {

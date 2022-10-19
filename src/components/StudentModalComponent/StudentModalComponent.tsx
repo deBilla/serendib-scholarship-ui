@@ -7,7 +7,8 @@ export type StudentPropType = {
     form: any,
     studentid: string,
     config: any,
-    onHide(): void
+    onHide(): void,
+    onSave(): void
 }
 
 class StudentModalComponent extends Component<StudentPropType> {
@@ -19,14 +20,14 @@ class StudentModalComponent extends Component<StudentPropType> {
         return <Modal show={this.props.show}>
             <Modal.Header closeButton onClick={this.props.onHide}>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Details of Student {this.props.studentid}
+                    Details of Student {this.props.config[1].value}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {this.props.form}
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={this.props.onHide}>Save</Button>
+                <Button onClick={this.props.onSave}>Save</Button>
                 <Button onClick={this.props.onHide}>Delete</Button>
                 <Button onClick={this.props.onHide}>Close</Button>
             </Modal.Footer>
