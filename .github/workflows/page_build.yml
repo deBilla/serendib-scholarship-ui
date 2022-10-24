@@ -23,6 +23,9 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
+    env:
+      REACT_APP_ACCESS_KEY_ID: ${{ secrets.REACT_APP_ACCESS_KEY_ID }}
+      REACT_APP_SECRET_ACCESS_KEY: ${{ secrets.REACT_APP_ACCESS_KEY_ID }}
     
     steps:
     - uses: actions/checkout@v3
