@@ -55,7 +55,7 @@ export default class StudentModalButton extends Component<StudentModalButtonComp
 
     async downloadFile(fileName: any) {
         const bucketParams = {
-            Bucket: "ssdww",
+            Bucket: "serendib-ui",
             Key: fileName,
             Body: "BODY"
         };
@@ -88,7 +88,7 @@ export default class StudentModalButton extends Component<StudentModalButtonComp
 
     async handleFileUpload(file: any) {
         const bucketParams = {
-            Bucket: "ssdww",
+            Bucket: "serendib-ui",
             Key: file['name'],
             Body: file,
         };
