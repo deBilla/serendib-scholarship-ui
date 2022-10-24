@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Form, Card } from 'react-bootstrap';
-type FormBuilderConfigType = "text" | "date";
+import { Form, Card, Button } from 'react-bootstrap';
+type FormBuilderConfigType = "text" | "date" | "file";
 
 export type FormBuilderConfig = {
     type: FormBuilderConfigType;
     label: string;
     value: string;
+    array: [],
     placeholder: string;
     onChange: (e: any) => VoidFunction;
 }
@@ -26,7 +27,7 @@ export const FormBuilder = (config: FormBuilderConfig[]) => {
                 )
             );
         }
-        if (config[val].type === "date") {
+        if (config[val].type === "file") {
             form.push(
                 React.cloneElement(
                     <Form.Label >{config[val].label}</Form.Label>
@@ -34,10 +35,23 @@ export const FormBuilder = (config: FormBuilderConfig[]) => {
             );
             form.push(
                 React.cloneElement(
-                    <Form.Control id="passwordHelpBlock" type='date' />,
-                    config[val]
+                    <span>: </span>
                 )
             );
+            let arr = config[val].array;
+            for (let i = 0; i < arr.length; i++) {
+                form.push(
+                    React.cloneElement(
+                        <Button onClick={config[val].onChange}>{arr[i]}</Button>
+                    )
+                );
+                form.push(
+                    React.cloneElement(
+                        <span> </span>
+                    )
+                );
+            }
+            
         }
     }
 

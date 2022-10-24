@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 import { withForm } from "../hoc/withForm";
 
 export type StudentPropType = {
@@ -8,12 +8,17 @@ export type StudentPropType = {
     studentid: string,
     config: any,
     onHide(): void,
-    onSave(): void
+    onSave(): void,
+    handleFileUpload(file: any): void
 }
 
 class StudentModalComponent extends Component<StudentPropType> {
     constructor(props: StudentPropType) {
         super(props);
+    }
+
+    handleFileUpload(e: any) {
+        this.props.handleFileUpload(e.target.files[0])
     }
 
     render(): React.ReactNode {
@@ -27,9 +32,16 @@ class StudentModalComponent extends Component<StudentPropType> {
                 {this.props.form}
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={this.props.onSave}>Save</Button>
-                <Button onClick={this.props.onHide}>Delete</Button>
-                <Button onClick={this.props.onHide}>Close</Button>
+                <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>
+                    <Form.Group controlId="formFile" className="mb-3" onChange={(e) => this.handleFileUpload(e)}>
+                        <Form.Control type="file" />
+                    </Form.Group>
+                </div>
+                <div style={{display: 'flex', width: '45%', justifyContent: 'space-between'}}>
+                    <Button onClick={this.props.onSave}>Save</Button>
+                    <Button onClick={this.props.onHide}>Delete</Button>
+                    <Button onClick={this.props.onHide}>Close</Button>
+                </div>
             </Modal.Footer>
         </Modal>
     }
