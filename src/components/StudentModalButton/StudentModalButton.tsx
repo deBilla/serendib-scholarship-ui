@@ -17,7 +17,7 @@ export default class StudentModalButton extends Component<StudentModalButtonComp
     constructor(props: StudentModalButtonComponentProps) {
         super(props); 
 
-        let config = [];
+        let config = []; 
         let arr = [...Object.keys(this.props.detail)];
 
         for (let i = 0; i < arr.length; i++ ) {
