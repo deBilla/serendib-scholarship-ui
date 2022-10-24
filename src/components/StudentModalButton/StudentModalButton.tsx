@@ -5,8 +5,6 @@ import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 const REGION = "us-east-1";
-console.log(process.env.REACT_APP_ACCESS_KEY_ID)
-console.log(process.env.REACT_APP_SECRET_ACCESS_KEY)
 const s3Client = new S3Client({ region: REGION, credentials: {accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID as string, secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY as string} });
 
 interface StudentModalButtonComponentProps {
