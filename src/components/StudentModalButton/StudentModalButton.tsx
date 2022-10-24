@@ -15,7 +15,7 @@ interface StudentModalButtonComponentProps {
 
 export default class StudentModalButton extends Component<StudentModalButtonComponentProps, { show: boolean, config: any }> {
     constructor(props: StudentModalButtonComponentProps) {
-        super(props);
+        super(props); 
 
         let config = [];
         let arr = [...Object.keys(this.props.detail)];
