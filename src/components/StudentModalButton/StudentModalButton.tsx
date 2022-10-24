@@ -14,9 +14,9 @@ interface StudentModalButtonComponentProps {
 
 export default class StudentModalButton extends Component<StudentModalButtonComponentProps, { show: boolean, config: any }> {
     constructor(props: StudentModalButtonComponentProps) {
-        super(props);
+        super(props); 
 
-        let config = [];
+        let config = []; 
         let arr = [...Object.keys(this.props.detail)];
 
         for (let i = 0; i < arr.length; i++ ) {
@@ -55,7 +55,7 @@ export default class StudentModalButton extends Component<StudentModalButtonComp
 
     async downloadFile(fileName: any) {
         const bucketParams = {
-            Bucket: "ssdww",
+            Bucket: "serendib-ui",
             Key: fileName,
             Body: "BODY"
         };
@@ -88,7 +88,7 @@ export default class StudentModalButton extends Component<StudentModalButtonComp
 
     async handleFileUpload(file: any) {
         const bucketParams = {
-            Bucket: "ssdww",
+            Bucket: "serendib-ui",
             Key: file['name'],
             Body: file,
         };
