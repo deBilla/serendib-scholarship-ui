@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import StudentModalComponent from '../StudentModalComponent/StudentModalComponent';
+import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
+const REGION = "us-east-1";
+const s3Client = new S3Client({ region: REGION, credentials: {accessKeyId: '', secretAccessKey: ''} });
 
 interface StudentModalButtonComponentProps {
     studentId: string,
@@ -12,18 +17,30 @@ export default class StudentModalButton extends Component<StudentModalButtonComp
         super(props);
 
         let config = [];
-        let arr = [...Object.entries(this.props.detail)];
+        let arr = [...Object.keys(this.props.detail)];
 
         for (let i = 0; i < arr.length; i++ ) {
-            let str = arr[i] + '';
-            let valArr = str.split(",");
+            let label = arr[i];
+            let value = this.props.detail[arr[i]];
+            let obj;
 
-            let obj = {
-                label: valArr[0],
-                value: valArr[1],
-                type: 'text',
-                onChange: (e: any) => {
-                    this.setConfigState(e.target.value, i);
+            if (label === 'files') {
+                obj = {
+                    label: label,
+                    array: value,
+                    type: 'file',
+                    onChange: (e: any) => {
+                        this.downloadFile(e.target.innerText);
+                    }
+                }
+            } else {
+                obj = {
+                    label: label,
+                    value: value,
+                    type: 'text',
+                    onChange: (e: any) => {
+                        this.setConfigState(e.target.value, i);
+                    }
                 }
             }
 
@@ -34,6 +51,25 @@ export default class StudentModalButton extends Component<StudentModalButtonComp
             show: false,
             config: config
         };
+    }
+
+    async downloadFile(fileName: any) {
+        const bucketParams = {
+            Bucket: "ssdww",
+            Key: fileName,
+            Body: "BODY"
+        };
+
+        try {
+            const command = new GetObjectCommand(bucketParams);
+            const signedUrl = await getSignedUrl(s3Client, command, {
+                expiresIn: 3600,
+            });
+
+            window.open(signedUrl)
+        } catch(e) {
+            throw e;
+        }
     }
 
     setConfigState(value: any, i: any) {
@@ -50,10 +86,29 @@ export default class StudentModalButton extends Component<StudentModalButtonComp
         console.log(this.state.config);
     }
 
+    async handleFileUpload(file: any) {
+        const bucketParams = {
+            Bucket: "ssdww",
+            Key: file['name'],
+            Body: file,
+        };
+
+        try {
+            const data = await s3Client.send(new PutObjectCommand(bucketParams));
+            console.log(data);
+
+            let fileArr = this.state.config[this.state.config.length - 1].array;
+            fileArr.push(file['name']);
+            this.setConfigState(fileArr, this.state.config.length - 1);
+        } catch(e) {
+            throw e;
+        }
+    }
+
     render(): React.ReactNode {
         return <>
             <Button onClick={() => this.setModalShow(true)}>{this.props.studentId}</Button>
-            <StudentModalComponent config={this.state.config} show={this.state.show} onHide={() => this.setModalShow(false)} onSave={() => this.saveData()} studentid = {this.props.studentId} />
+            <StudentModalComponent config={this.state.config} show={this.state.show} handleFileUpload={(file: any) => this.handleFileUpload(file)} onHide={() => this.setModalShow(false)} onSave={() => this.saveData()} studentid = {this.props.studentId} />
         </>
     }
 }
