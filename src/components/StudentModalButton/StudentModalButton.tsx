@@ -7,6 +7,8 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 const REGION = "us-east-1";
 const s3Client = new S3Client({ region: REGION, credentials: {accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID as string, secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY as string} });
 
+alert(process.env.REACT_APP_ENV_TEST);
+
 interface StudentModalButtonComponentProps {
     studentId: string,
     detail: any
