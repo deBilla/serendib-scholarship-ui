@@ -38,7 +38,7 @@ export const FormBuilder = (config: FormBuilderConfig[]) => {
                     <span>: </span>
                 )
             );
-            let arr = config[val].array;
+            let arr = config && config[val] && config[val].array ? config[val].array : [];
             for (let i = 0; i < arr.length; i++) {
                 form.push(
                     React.cloneElement(

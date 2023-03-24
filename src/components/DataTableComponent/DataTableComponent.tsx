@@ -2,20 +2,10 @@ import React, { Component } from 'react';
 import DataGrid from 'react-data-grid';
 
 interface DataTableProps {
-    columns: columnType[],
-    rows: rowType[],
+    columns: any,
+    rows: any,
     type: string
 }
-
-type columnType = {
-    key: string;
-    name: string;
-};
-
-type rowType = {
-    id: number;
-    name: string;
-};
   
 export default class DataTableComponent extends Component<DataTableProps> {
     constructor(props: DataTableProps) {

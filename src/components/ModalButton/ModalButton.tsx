@@ -7,14 +7,8 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 const REGION = "us-east-1";
 const s3Client = new S3Client({ region: REGION, credentials: {accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID as string, secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY as string} });
 
-interface ModalButtonComponentProps {
-    id: string,
-    detail: any,
-    type: string
-}
-
-export default class ModalButton extends Component<ModalButtonComponentProps, { show: boolean, config: any }> {
-    constructor(props: ModalButtonComponentProps) {
+export default class ModalButton extends Component<any, { show: boolean, config: any }> {
+    constructor(props: any) {
         super(props); 
 
         let config = []; 
@@ -84,7 +78,28 @@ export default class ModalButton extends Component<ModalButtonComponentProps, { 
     }
 
     saveData() {
+        if (this.props.isAddNew) {
+            let row = this.createRow();
+            this.props.addNewHandler(row);
+        } else {
+            let row = this.createRow();
+            this.props.editRowHandler(row);
+        }
+
+        this.setModalShow(false);
         console.log(this.state.config);
+    }
+
+    createRow() {
+        let configArr = this.state.config;
+        let row = {};
+
+        for (let i=0; i<configArr.length; i++) {
+            let label = configArr[i]['label'];
+            Object.assign(row, {[label]: configArr[i]['value']});
+        }
+
+        return row;
     }
 
     async handleFileUpload(file: any) {
