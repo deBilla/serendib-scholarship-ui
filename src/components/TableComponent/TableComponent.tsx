@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import DataTableComponent from '../../components/DataTableComponent/DataTableComponent';
-import StudentModalButton from '../../components/StudentModalButton/StudentModalButton';
+import DataTableComponent from '../DataTableComponent/DataTableComponent';
+import ModalButton from '../../components/ModalButton/ModalButton';
 
 const columns = [
     {
@@ -9,7 +9,7 @@ const columns = [
         formatter(props: any) {
             return (
                 <>
-                    <StudentModalButton detail={props.row} studentId={props.row.id} />
+                    <ModalButton detail={props.row} id={props.row.id} />
                 </>
             );
         },
@@ -30,6 +30,6 @@ const rows = [
     { id: 1, name: 'Demo', contactNo: '', email: '', university: '', course: '', startDate: '', endDate: '', schoolEndDate: '', sponsor: '', files: [] }
 ];
 
-export default function StudentTableContainer() {
+export default function TableContainer() {
     return (<DataTableComponent columns={columns} rows={rows} />);
 }

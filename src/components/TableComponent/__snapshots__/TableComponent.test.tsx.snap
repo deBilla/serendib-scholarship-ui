@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StudentTableComponent renders 1`] = `
+exports[`TableComponent renders 1`] = `
 <div>
   <div
     aria-colcount="10"

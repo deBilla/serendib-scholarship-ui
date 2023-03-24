@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { withForm } from "../hoc/withForm";
 
-export type StudentPropType = {
+export type PropType = {
     show: boolean,
     form: any,
-    studentid: string,
+    id: string,
     config: any,
+    type: string,
     onHide(): void,
     onSave(): void,
     handleFileUpload(file: any): void
 }
 
-class StudentModalComponent extends Component<StudentPropType> {
-    constructor(props: StudentPropType) {
+class ModalComponent extends Component<PropType> {
+    constructor(props: PropType) {
         super(props);
     }
 
@@ -25,7 +26,7 @@ class StudentModalComponent extends Component<StudentPropType> {
         return <Modal show={this.props.show}>
             <Modal.Header closeButton onClick={this.props.onHide}>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Details of Student {this.props.config[1].value}
+                    Details of {this.props.type} {this.props.config[1].value}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -47,4 +48,4 @@ class StudentModalComponent extends Component<StudentPropType> {
     }
 }
 
-export default withForm(StudentModalComponent);
+export default withForm(ModalComponent);

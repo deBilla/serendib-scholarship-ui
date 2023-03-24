@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import React from "react";
 import { describe, it, expect } from "@jest/globals";
-import StudentModalButton from "./StudentModalButton";
+import StudentModalButton from "./ModalButton";
 
 const details = [
   { id: 0, name: 'Example', contactNo: '', email: '', university: '', course: '', startDate: '', endDate: '', schoolEndDate: '', sponsor: '' },
@@ -10,7 +10,7 @@ const details = [
 
 describe("Card", () => {
   it("renders", () => {
-    const wrapper = render(<StudentModalButton detail={details} studentId={"1"} />);
+    const wrapper = render(<StudentModalButton detail={details} id={"1"} />);
     expect(wrapper.container).toMatchSnapshot();
   });
 });

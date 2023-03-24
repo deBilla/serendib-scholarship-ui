@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
-import StudentModalComponent from '../StudentModalComponent/StudentModalComponent';
+import ModalComponent from '../ModalComponent/ModalComponent';
 import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 const REGION = "us-east-1";
 const s3Client = new S3Client({ region: REGION, credentials: {accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID as string, secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY as string} });
 
-interface StudentModalButtonComponentProps {
-    studentId: string,
+interface ModalButtonComponentProps {
+    id: string,
     detail: any
 }
 
-export default class StudentModalButton extends Component<StudentModalButtonComponentProps, { show: boolean, config: any }> {
-    constructor(props: StudentModalButtonComponentProps) {
+export default class ModalButton extends Component<ModalButtonComponentProps, { show: boolean, config: any }> {
+    constructor(props: ModalButtonComponentProps) {
         super(props); 
 
         let config = []; 
@@ -107,8 +107,16 @@ export default class StudentModalButton extends Component<StudentModalButtonComp
 
     render(): React.ReactNode {
         return <>
-            <Button onClick={() => this.setModalShow(true)}>{this.props.studentId}</Button>
-            <StudentModalComponent config={this.state.config} show={this.state.show} handleFileUpload={(file: any) => this.handleFileUpload(file)} onHide={() => this.setModalShow(false)} onSave={() => this.saveData()} studentid = {this.props.studentId} />
+            <Button onClick={() => this.setModalShow(true)}>{this.props.id}</Button>
+            <ModalComponent 
+                config={this.state.config} 
+                show={this.state.show} 
+                handleFileUpload={(file: any) => this.handleFileUpload(file)} 
+                onHide={() => this.setModalShow(false)} 
+                onSave={() => this.saveData()} 
+                id = {this.props.id}
+                type = {'Student'}
+             />
         </>
     }
 }

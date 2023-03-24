@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import StudentTableComponent from '../../components/StudentTableComponent/StudentTableComponent';
+import StudentTableComponent from '../../components/TableComponent/TableComponent';
 import { Navbar, Container, Nav, Button, Tab, Col, Row } from 'react-bootstrap';
 
 interface LandingContainerProp { }
