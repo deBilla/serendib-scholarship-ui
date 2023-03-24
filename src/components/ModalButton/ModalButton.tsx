@@ -9,8 +9,15 @@ const s3Client = new S3Client({ region: REGION, credentials: {accessKeyId: proce
 
 export default class ModalButton extends Component<any, { show: boolean, config: any }> {
     constructor(props: any) {
-        super(props); 
+        super(props);
 
+        this.state = {
+            show: false,
+            config: this.createConfig(false)
+        };
+    }
+
+    createConfig(isEmpty: boolean) {
         let config = []; 
         let arr = [...Object.keys(this.props.detail)];
 
@@ -29,23 +36,33 @@ export default class ModalButton extends Component<any, { show: boolean, config:
                     }
                 }
             } else {
-                obj = {
-                    label: label,
-                    value: value,
-                    type: 'text',
-                    onChange: (e: any) => {
-                        this.setConfigState(e.target.value, i);
+                if (label === 'sponsor') {
+                    let sponsorNameArr = this.props.sponsorArr ? this.props.sponsorArr.map((s: any) => s.name): [];
+
+                    obj = {
+                        label: label,
+                        array: sponsorNameArr,
+                        type: 'select',
+                        onChange: (e: any) => {
+                            this.setConfigState(isEmpty ? '' : e.target.value, i);
+                        }
+                    }
+                } else {
+                    obj = {
+                        label: label,
+                        value: value,
+                        type: 'text',
+                        onChange: (e: any) => {
+                            this.setConfigState(isEmpty ? '' : e.target.value, i);
+                        }
                     }
                 }
             }
 
             config.push(obj);
         }
-
-        this.state = {
-            show: false,
-            config: config
-        };
+        
+        return config;
     }
 
     async downloadFile(fileName: any) {
@@ -88,6 +105,7 @@ export default class ModalButton extends Component<any, { show: boolean, config:
 
         this.setModalShow(false);
         console.log(this.state.config);
+        this.setState({ config: this.createConfig(true) });
     }
 
     createRow() {

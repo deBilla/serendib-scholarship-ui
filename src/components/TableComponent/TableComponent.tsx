@@ -4,7 +4,7 @@ import DataTableComponent from '../DataTableComponent/DataTableComponent';
 import ModalButton from '../../components/ModalButton/ModalButton';
 
 const studentEmptyRow = { id: '', name: '', contactNo: '', email: '', university: '', course: '', startDate: '', endDate: '', schoolEndDate: '', sponsor: '', files: [] };
-const sponsorEmptyRow = { id: '', name: '' };
+const sponsorEmptyRow = { id: '', name: '', contactNo: '', email: '' };
 
 export default function TableComponent(props: any) {
     const data = {
@@ -14,7 +14,7 @@ export default function TableComponent(props: any) {
                     key: 'id', name: 'ID', width: 10,
                     formatter(props: any) {
                         return (
-                            <ModalButton detail={props.row} id={props.row.id} type={props.type} editRowHandler={editRowHandler} />
+                            <ModalButton detail={props.row} id={props.row.id} type={props.type} editRowHandler={editRowHandler} sponsorArr={data.sponsor.rows} />
                         );
                     },
                 },
@@ -26,7 +26,8 @@ export default function TableComponent(props: any) {
                 { key: 'startDate', name: 'Course Start Date' },
                 { key: 'endDate', name: 'Course End Date' },
                 { key: 'schoolEndDate', name: 'Schol. start Date' },
-                { key: 'sponsor', name: 'Sponsor Name' }
+                { key: 'sponsor', name: 'Sponsor Name' },
+                { key: 'files', name: 'files' }
             ],
             rows: [
                 { id: 0, name: 'Example', contactNo: '', email: '', university: '', course: '', startDate: '', endDate: '', schoolEndDate: '', sponsor: '', files: [] },
@@ -39,15 +40,18 @@ export default function TableComponent(props: any) {
                     key: 'id', name: 'ID', width: 10,
                     formatter(props: any) {
                         return (
-                            <ModalButton detail={props.row} id={props.row.id} type={props.type} editRowHandler={editRowHandler} />
+                            <ModalButton detail={props.row} id={props.row.id} type={props.type} editRowHandler={editRowHandler} sponsorArr={data.sponsor.rows} />
                         );
                     },
                 },
                 { key: 'name', name: 'Name' },
+                { key: 'contactNo', name: 'Contact No' },
+                { key: 'email', name: 'Email' },
+                { key: 'files', name: 'files' }
             ],
             rows: [
-                { id: 0, name: 'Example' },
-                { id: 1, name: 'Demo' }
+                { id: 0, name: 'Serendib Fund', contactNo: '', email: '', files: []},
+                { id: 1, name: 'Dimuthu', contactNo: '', email: '', files: []}
             ]
         }
     };
@@ -79,6 +83,7 @@ export default function TableComponent(props: any) {
                     type={props.type}
                     isAddNew={true}
                     addNewHandler={addNewHandler}
+                    sponsorArr={data.sponsor.rows}
                 />
             </div>
             <DataTableComponent 
