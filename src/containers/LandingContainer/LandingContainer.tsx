@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import TableComponent from '../../components/TableComponent/TableComponent';
 import { Navbar, Container, Nav, Button, Tab, Col, Row } from 'react-bootstrap';
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 interface LandingContainerProp { }
 
@@ -32,14 +35,16 @@ export default class LandingContainer extends Component<LandingContainerProp> {
                             </Nav>
                         </Col>
                         <Col sm={11}>
-                            <Tab.Content>
-                                <Tab.Pane eventKey="first">
-                                    <TableComponent type={'student'} />
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="second">
-                                    <TableComponent type={'sponsor'} />
-                                </Tab.Pane>
-                            </Tab.Content>
+                            <QueryClientProvider client={queryClient}>
+                                <Tab.Content>
+                                    <Tab.Pane eventKey="first">
+                                        <TableComponent type={'student'} />
+                                    </Tab.Pane>
+                                    <Tab.Pane eventKey="second">
+                                        <TableComponent type={'sponsor'} />
+                                    </Tab.Pane>
+                                </Tab.Content>
+                            </QueryClientProvider>
                         </Col>
                     </Row>
                 </Tab.Container>
