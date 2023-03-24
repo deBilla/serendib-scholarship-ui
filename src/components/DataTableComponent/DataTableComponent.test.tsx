@@ -5,7 +5,7 @@ import DataTableComponent from "./DataTableComponent";
 
 describe("Card", () => {
   it("renders", () => {
-    const wrapper = render(<DataTableComponent columns={[]} rows={[]} />);
+    const wrapper = render(<DataTableComponent columns={[]} rows={[]} type={'studen'} />);
     expect(wrapper.container).toMatchSnapshot();
   });
 });

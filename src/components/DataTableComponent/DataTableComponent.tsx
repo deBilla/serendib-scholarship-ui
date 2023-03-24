@@ -3,7 +3,8 @@ import DataGrid from 'react-data-grid';
 
 interface DataTableProps {
     columns: columnType[],
-    rows: rowType[]
+    rows: rowType[],
+    type: string
 }
 
 type columnType = {

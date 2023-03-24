@@ -3,12 +3,12 @@
 exports[`TableComponent renders 1`] = `
 <div>
   <div
-    aria-colcount="10"
+    aria-colcount="2"
     aria-rowcount="3"
     class="rdg r104f42s700-beta15"
     dir="ltr"
     role="grid"
-    style="height: 100vh; grid-template-rows: 35px repeat(2, 35px); --rdg-header-row-height: 35px; --rdg-summary-row-height: 35px; --rdg-sign: 1; grid-template-columns: 80px 80px 80px 80px 80px 80px 80px 80px 80px 80px;"
+    style="height: 100vh; grid-template-rows: 35px repeat(2, 35px); --rdg-header-row-height: 35px; --rdg-summary-row-height: 35px; --rdg-sign: 1; grid-template-columns: 80px 80px;"
   >
     <div
       aria-rowindex="1"

@@ -9,7 +9,8 @@ const s3Client = new S3Client({ region: REGION, credentials: {accessKeyId: proce
 
 interface ModalButtonComponentProps {
     id: string,
-    detail: any
+    detail: any,
+    type: string
 }
 
 export default class ModalButton extends Component<ModalButtonComponentProps, { show: boolean, config: any }> {
@@ -108,15 +109,7 @@ export default class ModalButton extends Component<ModalButtonComponentProps, { 
     render(): React.ReactNode {
         return <>
             <Button onClick={() => this.setModalShow(true)}>{this.props.id}</Button>
-            <ModalComponent 
-                config={this.state.config} 
-                show={this.state.show} 
-                handleFileUpload={(file: any) => this.handleFileUpload(file)} 
-                onHide={() => this.setModalShow(false)} 
-                onSave={() => this.saveData()} 
-                id = {this.props.id}
-                type = {'Student'}
-             />
+            <ModalComponent config={this.state.config} show={this.state.show} handleFileUpload={(file: any) => this.handleFileUpload(file)} onHide={() => this.setModalShow(false)} onSave={() => this.saveData()} id = {this.props.id} />
         </>
     }
 }
