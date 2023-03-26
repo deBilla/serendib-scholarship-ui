@@ -21,7 +21,7 @@ export default function TableComponent(props: any) {
             queryKey: s,
             queryFn: () => axios.get(`${process.env.REACT_APP_WS_HOST}/${s}/`).then((res: any) => res && res.data && res.data.message ? res.data.message : []),
           };
-        }, { refetchInterval: () => false })
+        })
     );
 
     const [rows, setRows] = useState<any[]>(apis && apis[0] && apis[0].data ? apis[0].data : []);
