@@ -97,7 +97,7 @@ export default function TableComponent(props: any) {
     return (
         <>
             <div style={{marginBottom: '10px', marginLeft: '88%'}}>
-                {apis && apis[1] && apis[1].data && <ModalButton 
+                <ModalButton 
                     detail={props.type === 'student' ? studentEmptyRow : sponsorEmptyRow} 
                     id={`Add New ${props.type}`} 
                     type={props.type}
@@ -105,7 +105,6 @@ export default function TableComponent(props: any) {
                     addNewHandler={addNewHandler}
                     sponsorArr={apis[1].data}
                 />
-}
             </div>
             <DataTableComponent 
                 columns={props.type === 'student' ? columnData.student.columns : columnData.sponsor.columns} 
