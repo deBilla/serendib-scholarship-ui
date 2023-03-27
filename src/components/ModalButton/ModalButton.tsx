@@ -148,9 +148,6 @@ export default class ModalButton extends Component<any, { show: boolean, config:
             let fileArr = this.state.config[this.state.config.length - 1].array;
             fileArr.push(file['name']);
             this.setConfigState(fileArr, this.state.config.length - 1);
-
-            let row = this.createRow();
-            this.props.editRowHandler(row);
         } catch(e) {
             throw e;
         }
