@@ -41,8 +41,16 @@ export default function TableComponent(props: any) {
                 { key: 'email', name: 'Email' },
                 { key: 'university', name: 'Univeristy' },
                 { key: 'course', name: 'Course of Study' },
-                { key: 'startDate', name: 'Course Start Date' },
-                { key: 'endDate', name: 'Course End Date' },
+                { key: 'startDate', name: 'Course Start Date',
+                    formatter(props: any) {
+                        return props && props.row && props.row.startDate ? props.row.startDate.split('T')[0] : ''
+                    }
+                },
+                { key: 'endDate', name: 'Course End Date',
+                    formatter(props: any) {
+                        return props && props.row && props.row.endDate ? props.row.endDate.split('T')[0]: ''
+                    }
+                },
                 { key: 'schoolEndDate', name: 'Schol. start Date' },
                 { key: 'sponsor', name: 'Sponsor Name' },
                 { key: 'files', name: 'files' }

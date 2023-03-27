@@ -14,19 +14,6 @@ export type FormBuilderConfig = {
 export const FormBuilder = (config: FormBuilderConfig[]) => {
     const form = [];
     for (let val in config) {
-        if (config[val].type === "text") {
-            form.push(
-                React.cloneElement(
-                    <Form.Label >{config[val].label}</Form.Label>
-                )
-            );
-            form.push(
-                React.cloneElement(
-                    <Form.Control />,
-                    config[val]
-                )
-            );
-        }
         if (config[val].type === "select") {
             form.push(
                 React.cloneElement(
@@ -48,7 +35,7 @@ export const FormBuilder = (config: FormBuilderConfig[]) => {
                 )
             );
         }
-        if (config[val].type === "file") {
+        else if (config[val].type === "file") {
             form.push(
                 React.cloneElement(
                     <Form.Label >{config[val].label}</Form.Label>
@@ -73,6 +60,18 @@ export const FormBuilder = (config: FormBuilderConfig[]) => {
                 );
             }
             
+        } else {
+            form.push(
+                React.cloneElement(
+                    <Form.Label >{config[val].label}</Form.Label>
+                )
+            );
+            form.push(
+                React.cloneElement(
+                    <Form.Control />,
+                    config[val]
+                )
+            );
         }
     }
 

@@ -26,17 +26,19 @@ export default class ModalButton extends Component<any, { show: boolean, config:
             let value = this.props.detail && this.props.detail[arr[i]] ? this.props.detail[arr[i]] : '';
             let obj;
 
-            if (label === 'files') {
-                obj = {
-                    label: label,
-                    array: value,
-                    type: 'file',
-                    onChange: (e: any) => {
-                        this.downloadFile(e.target.innerText);
+            switch (label) {
+                case 'files':
+                    obj = {
+                        label: label,
+                        array: value,
+                        type: 'file',
+                        onChange: (e: any) => {
+                            this.downloadFile(e.target.innerText);
+                        }
                     }
-                }
-            } else {
-                if (label === 'sponsor') {
+
+                    break;
+                case 'sponsor':
                     let sponsorNameArr = this.props.sponsorArr ? this.props.sponsorArr.map((s: any) => s.name): [];
 
                     obj = {
@@ -47,16 +49,28 @@ export default class ModalButton extends Component<any, { show: boolean, config:
                             this.setConfigState(isEmpty ? '' : e.target.value, i);
                         }
                     }
-                } else {
+
+                    break;
+                default:
+                    let type = 'text';
+
+                    if (label === 'startDate' || label === 'endDate') {
+                        let dateString = value ? value : '';
+                        let dateArr = dateString ? dateString.split('T') : undefined;
+                        value = dateArr ? dateArr[0] : '';
+                        type = 'date';
+                    }
+
                     obj = {
                         label: label,
                         value: value,
-                        type: 'text',
+                        type: type,
                         onChange: (e: any) => {
                             this.setConfigState(isEmpty ? '' : e.target.value, i);
                         }
                     }
-                }
+
+                    break;
             }
 
             config.push(obj);
