@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import React, { useState, useEffect } from 'react';
+import { ProgressBar } from 'react-bootstrap';
 import DataTableComponent from '../DataTableComponent/DataTableComponent';
 import ModalButton from '../../components/ModalButton/ModalButton';
 import axios from "axios";
@@ -24,6 +25,24 @@ export default function TableComponent(props: any) {
           };
         })
     );
+
+    if (apis.some(result => result.isLoading)) {
+        return (
+            <div style={{backgroundColor: 'black', height: '1500px'}}>
+                <ProgressBar>
+                    <ProgressBar animated striped variant="success" now={100} key={1} />
+                </ProgressBar>
+            </div>
+        );
+    } else if (apis.some(result => result.error)) {
+        return (
+            <div style={{backgroundColor: 'black', height: '1500px'}}>
+                <ProgressBar>
+                    <ProgressBar animated label={'Error occured when fetching data, please wait for few minutes'} striped variant="danger" now={100} key={1} />
+                </ProgressBar>
+            </div>
+        );
+    }
 
     const columnData = {
         student: {
@@ -88,14 +107,14 @@ export default function TableComponent(props: any) {
 
     return (
         <>
-            <div style={{marginBottom: '10px', marginLeft: '88%'}}>
+            <div style={{marginBottom: '10px', marginLeft: '88%', marginTop: '10px'}}>
                 <ModalButton 
                     detail={props.type === 'student' ? studentEmptyRow : sponsorEmptyRow} 
                     id={`Add New ${props.type}`} 
                     type={props.type}
                     isAddNew={true}
                     addNewHandler={addNewHandler}
-                    sponsorArr={apis && apis[1] && apis[1].data ? apis[1].data : []}
+                    sponsorArr={apis[1].data}
                 />
             </div>
             <DataTableComponent 

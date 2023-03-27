@@ -23,13 +23,13 @@ export default class LandingContainer extends Component<LandingContainerProp> {
             </Navbar>
             <Container style={btn} fluid>
                 <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                    <Row style={btn}>
-                        <Col sm={1}>
-                            <Nav variant="pills" className="flex-column">
+                    <Row style={{backgroundColor: '#212121'}}>
+                        <Col sm={1} style={{backgroundColor: 'black'}}>
+                            <Nav style={{marginTop: '15px'}} variant="pills" className="flex-column">
                                 <Nav.Item>
                                     <Nav.Link eventKey="first">Student</Nav.Link>
                                 </Nav.Item>
-                                <Nav.Item>
+                                <Nav.Item  style={{marginTop: '15px'}}>
                                     <Nav.Link eventKey="second">Sponsors</Nav.Link>
                                 </Nav.Item>
                             </Nav>
