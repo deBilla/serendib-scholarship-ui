@@ -25,12 +25,6 @@ export default function TableComponent(props: any) {
         })
     );
 
-    const [rows, setRows] = useState<any[]>(apis && apis[0] && apis[0].data ? apis[0].data : []);
-
-    useEffect(() => {
-        setRows(apis && apis[0] && apis[0].data ? apis[0].data : []);
-    }, [apis]);
-
     const columnData = {
         student: {
             columns: [
@@ -76,23 +70,12 @@ export default function TableComponent(props: any) {
         axios.post(WS_URL, {
             ...row
         }).then(res => console.log(res)).catch(err => console.log(err));
-        setRows([...rows, row]);
     }
 
     const editRowHandler = (row: any) => {
-        let updatedRows = rows.map((item: any) => {
-            if (item.id === row.id) {
-                item = row;
-            }
-
-            return item;
-        });
-
-        axios.patch(WS_URL, {
+        axios.patch(`${WS_URL}?id=${row.id}`, {
             ...row
         }).then(res => console.log(res)).catch(err => console.log(err));
-
-        setRows(updatedRows);
     }
 
     return (
@@ -104,12 +87,12 @@ export default function TableComponent(props: any) {
                     type={props.type}
                     isAddNew={true}
                     addNewHandler={addNewHandler}
-                    sponsorArr={apis[1].data}
+                    sponsorArr={apis && apis[1] && apis[1].data ? apis[1].data : []}
                 />
             </div>
             <DataTableComponent 
                 columns={props.type === 'student' ? columnData.student.columns : columnData.sponsor.columns} 
-                rows={rows} 
+                rows={apis && apis[0] && apis[0].data ? apis[0].data : []} 
                 type= {props.type}
             />
         </>

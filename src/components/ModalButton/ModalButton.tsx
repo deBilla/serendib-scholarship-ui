@@ -23,7 +23,7 @@ export default class ModalButton extends Component<any, { show: boolean, config:
 
         for (let i = 0; i < arr.length; i++ ) {
             let label = arr[i];
-            let value = this.props.detail[arr[i]];
+            let value = this.props.detail && this.props.detail[arr[i]] ? this.props.detail[arr[i]] : '';
             let obj;
 
             if (label === 'files') {
