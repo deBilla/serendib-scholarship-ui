@@ -28,7 +28,7 @@ export default function TableComponent(props: any) {
 
     if (apis.some(result => result.isLoading)) {
         return (
-            <div style={{backgroundColor: 'black', height: '887px'}}>
+            <div style={{backgroundColor: 'black', height: 'calc(100vh - 70px)'}}>
                 <ProgressBar>
                     <ProgressBar animated striped variant="success" now={100} key={1} />
                 </ProgressBar>
@@ -36,7 +36,7 @@ export default function TableComponent(props: any) {
         );
     } else if (apis.some(result => result.error)) {
         return (
-            <div style={{backgroundColor: 'black', height: '887px'}}>
+            <div style={{backgroundColor: 'black', height: 'calc(100vh - 70px)'}}>
                 <ProgressBar>
                     <ProgressBar animated label={'Error occured when fetching data, please wait for few minutes'} striped variant="danger" now={100} key={1} />
                 </ProgressBar>

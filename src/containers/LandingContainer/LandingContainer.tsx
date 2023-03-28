@@ -17,7 +17,7 @@ export default class LandingContainer extends Component<LandingContainerProp> {
 
     render(): React.ReactNode {
         return <>
-            <Navbar bg="dark" variant="dark" fixed="top">
+            <Navbar bg="dark" variant="dark" fixed="top" style={{height: '70px'}}>
                 <Container fluid>
                     <Navbar.Brand style={{backgroundColor: 'black', borderRadius: '10px'}}><span style={{margin: '10px'}}>Serendib Foundation</span></Navbar.Brand>
                     <Nav className="ml-auto">
@@ -25,10 +25,10 @@ export default class LandingContainer extends Component<LandingContainerProp> {
                     </Nav>
                 </Container>
             </Navbar>
-            <Container style={{...btn, top: '82px', position: 'relative'}} fluid>
+            <Container style={{...btn, top: '70px', position: 'relative'}} fluid>
                 <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                     <Row style={{backgroundColor: '#212121'}}>
-                        <Col sm={1} style={{backgroundColor: 'black', height: '100%', position: 'fixed'}}>
+                        <Col sm={1} style={{backgroundColor: 'black', width: '150px', height: '100%', position: 'fixed'}}>
                             <Nav style={{marginTop: '15px'}} variant="pills" className="flex-column">
                                 <Nav.Item>
                                     <Nav.Link eventKey="first">Student</Nav.Link>
@@ -38,7 +38,7 @@ export default class LandingContainer extends Component<LandingContainerProp> {
                                 </Nav.Item>
                             </Nav>
                         </Col>
-                        <Col sm={11} style={{marginLeft: '155px', position: 'relative'}}>
+                        <Col sm={11} style={{marginLeft: '150px', position: 'relative'}}>
                             <QueryClientProvider client={queryClient}>
                                 <Tab.Content>
                                     <Tab.Pane eventKey="first">
