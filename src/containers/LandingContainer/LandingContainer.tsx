@@ -37,7 +37,7 @@ export default class LandingContainer extends Component<LandingContainerProp> {
                                     <Nav.Link eventKey="second" style={{textAlign: 'center'}}>Sponsors</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item  style={{marginTop: '600px'}}>
-                                    <Nav.Link style={{textAlign: 'center'}}><img style={{width: '100px', height: '100px'}} src={logo} /></Nav.Link>
+                                    <Nav.Link href="https://billa-code.medium.com/" style={{textAlign: 'center'}}><img style={{width: '100px', height: '100px'}} src={logo} /></Nav.Link>
                                 </Nav.Item>
                             </Nav>
                         </Col>
