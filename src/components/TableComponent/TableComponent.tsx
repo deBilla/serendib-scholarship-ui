@@ -13,6 +13,8 @@ const SPONSOR_URL = process.env.REACT_APP_WS_HOST + "/sponsor";
 const studentEmptyRow = { id: '', name: '', contactNo: '', email: '', university: '', course: '', startDate: '', endDate: '', sponsor: '', files: [] };
 const sponsorEmptyRow = { id: '', name: '', contactNo: '', email: '' };
 
+const modalButtonStyle = {borderRadius: '30px', height: '30px', width: '30px', lineHeight: '0px', padding: '0'};
+
 export default function TableComponent(props: any) {
     const WS_URL = props.type === 'student' ? STUDENT_URL : SPONSOR_URL;
     const arr = [props.type === 'student' ? 'student' : 'sponsor', 'sponsor'];
@@ -51,7 +53,7 @@ export default function TableComponent(props: any) {
                     key: 'id', name: 'ID', width: 10,
                     formatter(props: any) {
                         return (
-                            <ModalButton detail={props.row} id={props.row.id} type={props.type} editRowHandler={editRowHandler} sponsorArr={apis[1].data} />
+                            <ModalButton style={modalButtonStyle} detail={props.row} id={props.row.id} type={props.type} editRowHandler={editRowHandler} sponsorArr={apis[1].data} />
                         );
                     },
                 },
@@ -81,7 +83,7 @@ export default function TableComponent(props: any) {
                     key: 'id', name: 'ID', width: 10,
                     formatter(props: any) {
                         return (
-                            <ModalButton detail={props.row} id={props.row.id} type={props.type} editRowHandler={editRowHandler} sponsorArr={apis[1].data} />
+                            <ModalButton style={modalButtonStyle} detail={props.row} id={props.row.id} type={props.type} editRowHandler={editRowHandler} sponsorArr={apis[1].data} />
                         );
                     },
                 },

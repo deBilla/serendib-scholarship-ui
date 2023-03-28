@@ -145,9 +145,11 @@ export default class ModalButton extends Component<any, { show: boolean, config:
             const data = await s3Client.send(new PutObjectCommand(bucketParams));
             console.log(data);
 
-            let fileArr = this.state.config[this.state.config.length - 1].array;
+            let index = this.state.config.findIndex((conf: any) => conf.label === 'files');
+
+            let fileArr = this.state.config[index].array;
             fileArr.push(file['name']);
-            this.setConfigState(fileArr, this.state.config.length - 1);
+            this.setConfigState(fileArr, index);
         } catch(e) {
             throw e;
         }
@@ -155,7 +157,7 @@ export default class ModalButton extends Component<any, { show: boolean, config:
 
     render(): React.ReactNode {
         return <>
-            <Button onClick={() => this.setModalShow(true)}>{this.props.id}</Button>
+            <Button style={this.props.style} onClick={() => this.setModalShow(true)}>{this.props.id}</Button>
             <ModalComponent config={this.state.config} show={this.state.show} handleFileUpload={(file: any) => this.handleFileUpload(file)} onHide={() => this.setModalShow(false)} onSave={() => this.saveData()} id = {this.props.id} />
         </>
     }

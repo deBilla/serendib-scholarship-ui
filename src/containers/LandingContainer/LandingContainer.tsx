@@ -31,10 +31,10 @@ export default class LandingContainer extends Component<LandingContainerProp> {
                         <Col sm={1} style={{backgroundColor: 'black', width: '150px', height: '100%', position: 'fixed'}}>
                             <Nav style={{marginTop: '15px'}} variant="pills" className="flex-column">
                                 <Nav.Item>
-                                    <Nav.Link eventKey="first">Student</Nav.Link>
+                                    <Nav.Link eventKey="first" style={{textAlign: 'center'}}>Student</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item  style={{marginTop: '15px'}}>
-                                    <Nav.Link eventKey="second">Sponsors</Nav.Link>
+                                    <Nav.Link eventKey="second" style={{textAlign: 'center'}}>Sponsors</Nav.Link>
                                 </Nav.Item>
                             </Nav>
                         </Col>
