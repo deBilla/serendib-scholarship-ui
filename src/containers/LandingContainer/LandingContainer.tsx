@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TableComponent from '../../components/TableComponent/TableComponent';
 import { Navbar, Container, Nav, Button, Tab, Col, Row } from 'react-bootstrap';
 import { QueryClient, QueryClientProvider } from "react-query";
-import logo from '../../assets/images/logo1.png';
+import logo from '../../assets/images/logo.png';
 
 const queryClient = new QueryClient();
 
@@ -21,7 +21,7 @@ export default class LandingContainer extends Component<LandingContainerProp> {
                 <Container fluid>
                     <Navbar.Brand style={{backgroundColor: 'black', borderRadius: '10px'}}><span style={{margin: '10px'}}>Serendib Foundation</span></Navbar.Brand>
                     <Nav className="ml-auto">
-                        <Nav.Link href="http://credoxyz.epizy.com/?i=1"><img style={{width: '50px', height: '50px', borderRadius: '50px'}} src={logo} /></Nav.Link>
+                        <Nav.Link href="https://billa-code.medium.com/"><img style={{width: '50px', height: '50px', borderRadius: '50px'}} src={logo} /></Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
@@ -35,6 +35,9 @@ export default class LandingContainer extends Component<LandingContainerProp> {
                                 </Nav.Item>
                                 <Nav.Item  style={{marginTop: '15px'}}>
                                     <Nav.Link eventKey="second" style={{textAlign: 'center'}}>Sponsors</Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item  style={{marginTop: '600px'}}>
+                                    <Nav.Link style={{textAlign: 'center'}}><img style={{width: '100px', height: '100px'}} src={logo} /></Nav.Link>
                                 </Nav.Item>
                             </Nav>
                         </Col>
