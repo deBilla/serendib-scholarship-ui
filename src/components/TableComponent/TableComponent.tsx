@@ -1,5 +1,3 @@
-import { render } from '@testing-library/react';
-import React, { useState, useEffect } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 import DataTableComponent from '../DataTableComponent/DataTableComponent';
 import ModalButton from '../../components/ModalButton/ModalButton';

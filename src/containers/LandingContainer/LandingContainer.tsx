@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TableComponent from '../../components/TableComponent/TableComponent';
-import { Navbar, Container, Nav, Button, Tab, Col, Row } from 'react-bootstrap';
+import { Navbar, Container, Nav, Tab, Col, Row } from 'react-bootstrap';
 import { QueryClient, QueryClientProvider } from "react-query";
 import logo from '../../assets/images/logo.png';
 
@@ -11,17 +11,13 @@ interface LandingContainerProp { }
 const btn = { backgroundColor: '#212529' };
 
 export default class LandingContainer extends Component<LandingContainerProp> {
-    constructor(props: LandingContainerProp) {
-        super(props);
-    }
-
     render(): React.ReactNode {
         return <>
             <Navbar bg="dark" variant="dark" fixed="top" style={{height: '70px'}}>
                 <Container fluid>
                     <Navbar.Brand style={{backgroundColor: 'black', borderRadius: '10px'}}><span style={{margin: '10px'}}>Serendib Foundation</span></Navbar.Brand>
                     <Nav className="ml-auto">
-                        <Nav.Link href="https://billa-code.medium.com/"><img style={{width: '50px', height: '50px', borderRadius: '50px'}} src={logo} /></Nav.Link>
+                        <Nav.Link href="https://billa-code.medium.com/"><img alt='Dimuthu' style={{width: '50px', height: '50px', borderRadius: '50px'}} src={logo} /></Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
@@ -37,7 +33,7 @@ export default class LandingContainer extends Component<LandingContainerProp> {
                                     <Nav.Link eventKey="second" style={{textAlign: 'center'}}>Sponsors</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item  style={{marginTop: '600px'}}>
-                                    <Nav.Link href="https://billa-code.medium.com/" style={{textAlign: 'center'}}><img style={{width: '100px', height: '100px'}} src={logo} /></Nav.Link>
+                                    <Nav.Link href="https://billa-code.medium.com/" style={{textAlign: 'center'}}><img alt='Dimuthu' style={{width: '100px', height: '100px'}} src={logo} /></Nav.Link>
                                 </Nav.Item>
                             </Nav>
                         </Col>

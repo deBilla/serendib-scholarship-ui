@@ -2,31 +2,16 @@ import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { withForm } from "../hoc/withForm";
 
-export type PropType = {
-    show: boolean,
-    form: any,
-    id: string,
-    config: any,
-    type: string,
-    onHide(): void,
-    onSave(): void,
-    handleFileUpload(file: any): void
-}
-
-class ModalComponent extends Component<PropType> {
-    constructor(props: PropType) {
-        super(props);
-    }
-
+class ModalComponent extends Component<any> {
     handleFileUpload(e: any) {
         this.props.handleFileUpload(e.target.files[0])
     }
 
-    render(): React.ReactNode {
+    render() {
         return <Modal show={this.props.show}>
             <Modal.Header closeButton onClick={this.props.onHide}>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Details of {this.props.type} {this.props.config[1].value}
+                    Details of {this.props.type} {this.props.config ? this.props.config[1].value : ''}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>

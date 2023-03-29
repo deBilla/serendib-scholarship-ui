@@ -158,7 +158,7 @@ export default class ModalButton extends Component<any, { show: boolean, config:
     render(): React.ReactNode {
         return <>
             <Button style={this.props.style} onClick={() => this.setModalShow(true)}>{this.props.id}</Button>
-            <ModalComponent config={this.state.config} show={this.state.show} handleFileUpload={(file: any) => this.handleFileUpload(file)} onHide={() => this.setModalShow(false)} onSave={() => this.saveData()} id = {this.props.id} />
+            {this.state.show && <ModalComponent config={this.state.config} show={this.state.show} handleFileUpload={(file: any) => this.handleFileUpload(file)} onHide={() => this.setModalShow(false)} onSave={() => this.saveData()} id = {this.props.id} />}
         </>
     }
 }

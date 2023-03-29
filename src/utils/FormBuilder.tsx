@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Form, Card, Button } from 'react-bootstrap';
+import React from 'react';
+import { Form, Button } from 'react-bootstrap';
 type FormBuilderConfigType = "text" | "date" | "file" | "select";
 
 export type FormBuilderConfig = {
@@ -13,65 +13,73 @@ export type FormBuilderConfig = {
 
 export const FormBuilder = (config: FormBuilderConfig[]) => {
     const form = [];
+    let formKey = 0;
     for (let val in config) {
         if (config[val].type === "select") {
             form.push(
                 React.cloneElement(
-                    <Form.Label >{config[val].label}</Form.Label>
+                    <Form.Label key={formKey} >{config[val].label}</Form.Label>
                 )
             );
+            formKey++;
 
             let arr = config && config[val] && config[val].array ? config[val].array : [];
             let children = [];
 
             for (let i = 0; i < arr.length; i++) {
-                children.push(<option onClick={config[val].onChange}>{arr[i]}</option>);
+                children.push(<option key={i} onClick={config[val].onChange}>{arr[i]}</option>);
             }
 
             form.push(
                 React.cloneElement(
-                    <Form.Select />,
+                    <Form.Select key={formKey} />,
                     config[val], children
                 )
             );
+            formKey++;
         }
         else if (config[val].type === "file") {
             form.push(
                 React.cloneElement(
-                    <Form.Label >{config[val].label}</Form.Label>
+                    <Form.Label key={formKey}>{config[val].label}</Form.Label>
                 )
             );
+            formKey++;
             form.push(
                 React.cloneElement(
-                    <span>: </span>
+                    <span key={formKey}>: </span>
                 )
             );
+            formKey++;
             let arr = config && config[val] && config[val].array ? config[val].array : [];
             for (let i = 0; i < arr.length; i++) {
                 form.push(
                     React.cloneElement(
-                        <Button onClick={config[val].onChange}>{arr[i]}</Button>
+                        <Button key={i} onClick={config[val].onChange}>{arr[i]}</Button>
                     )
                 );
                 form.push(
                     React.cloneElement(
-                        <span> </span>
+                        <span key={formKey}> </span>
                     )
                 );
+                formKey++;
             }
             
         } else {
             form.push(
                 React.cloneElement(
-                    <Form.Label >{config[val].label}</Form.Label>
+                    <Form.Label key={formKey} >{config[val].label}</Form.Label>
                 )
             );
+            formKey++;
             form.push(
                 React.cloneElement(
-                    <Form.Control />,
+                    <Form.Control key={formKey} />,
                     config[val]
                 )
             );
+            formKey++;
         }
     }
 
