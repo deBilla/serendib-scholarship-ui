@@ -6,6 +6,9 @@ interface LoginProps {
   handleClose: () => void;
 }
 
+const cacheKey = "LoginCache";
+const cacheTimeoutMinutes = 60;
+
 const LoginComponent: React.FC<LoginProps> = ({ show, handleClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +17,14 @@ const LoginComponent: React.FC<LoginProps> = ({ show, handleClose }) => {
   const handleLogin = (e: any) => {
     if (email === "geetha" && password === "geetha12345") {
       handleClose();
+
+      const expirationTime =
+        new Date().getTime() + cacheTimeoutMinutes * 60 * 1000;
+      const cache = {
+        data: { isLoggedIn: true },
+        expirationTime: expirationTime,
+      };
+      localStorage.setItem(cacheKey, JSON.stringify(cache));
     } else {
       setLoginFailed(true);
     }
@@ -57,17 +68,19 @@ const LoginComponent: React.FC<LoginProps> = ({ show, handleClose }) => {
         <Button variant="primary" type="submit" onClick={handleLogin}>
           Login
         </Button>
-        {loginFailed && <Form.Label>
-          <div
-            style={{
-              backgroundColor: "rgba(255, 100, 100, 0.85)",
-              padding: "10px",
-              borderRadius: "4px",
-            }}
-          >
-            Login failed. Please try again.
-          </div>
-        </Form.Label>}
+        {loginFailed && (
+          <Form.Label>
+            <div
+              style={{
+                backgroundColor: "rgba(255, 100, 100, 0.85)",
+                padding: "10px",
+                borderRadius: "4px",
+              }}
+            >
+              Login failed. Please try again.
+            </div>
+          </Form.Label>
+        )}
       </Modal.Footer>
     </Modal>
   );
