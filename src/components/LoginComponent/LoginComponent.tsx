@@ -32,7 +32,7 @@ const LoginComponent: React.FC<LoginProps> = ({ show, handleClose }) => {
 
   return (
     <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-      <Modal.Header closeButton>
+      <Modal.Header>
         <Modal.Title>Login</Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -62,9 +62,6 @@ const LoginComponent: React.FC<LoginProps> = ({ show, handleClose }) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
         <Button variant="primary" type="submit" onClick={handleLogin}>
           Login
         </Button>
