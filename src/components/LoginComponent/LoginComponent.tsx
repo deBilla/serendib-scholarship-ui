@@ -1,37 +1,24 @@
 import React, { useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 
-interface LoginProps {
-  show: boolean;
-  handleClose: () => void;
-}
+const cacheKey = "isLoggedIn";
 
-const cacheKey = "LoginCache";
-const cacheTimeoutMinutes = 60;
-
-const LoginComponent: React.FC<LoginProps> = ({ show, handleClose }) => {
+const LoginComponent = (props: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginFailed, setLoginFailed] = useState(false);
 
-  const handleLogin = (e: any) => {
+  const handleLogin = () => {
     if (email === "geetha" && password === "geetha12345") {
-      handleClose();
-
-      const expirationTime =
-        new Date().getTime() + cacheTimeoutMinutes * 60 * 1000;
-      const cache = {
-        data: { isLoggedIn: true },
-        expirationTime: expirationTime,
-      };
-      localStorage.setItem(cacheKey, JSON.stringify(cache));
+      props.handleLogin();
+      localStorage.setItem(cacheKey, 'true');
     } else {
       setLoginFailed(true);
     }
   };
 
   return (
-    <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+    <Modal show={props.show} backdrop="static" keyboard={false}>
       <Modal.Header>
         <Modal.Title>Login</Modal.Title>
       </Modal.Header>

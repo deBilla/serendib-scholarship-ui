@@ -1,39 +1,30 @@
 import LandingContainer from "./containers/LandingContainer/LandingContainer";
 import LoginComponent from "./components/LoginComponent/LoginComponent";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const cacheKey = "LoginCache";
+const cacheKey = "isLoggedIn";
 
 export default function App() {
-  const [loginShow, setLoginShow] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const getCache = () => {
-    const cachedData = localStorage.getItem(cacheKey);
-    const loginCachedData = cachedData !== null ? JSON.parse(cachedData) : null;
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn) setLoggedIn(true);
+  }, []);
 
-    if (
-      loginCachedData &&
-      new Date().getTime() < loginCachedData.expirationTime
-    ) {
-      return loginCachedData.data;
-    } else {
-      localStorage.removeItem(cacheKey);
-      return null;
-    }
+  const handleLogin = () => {
+    setLoggedIn(true);
   };
 
-  const isLoggedIn = getCache() ? getCache().isLoggedIn : false;
-
-  const handleClose = () => {
-    setLoginShow(false);
+  const handleLogout = () => {
+    localStorage.removeItem(cacheKey);
+    setLoggedIn(false);
   };
 
   return (
     <>
-      {!isLoggedIn && (
-        <LoginComponent show={loginShow} handleClose={handleClose} />
-      )}
-      {isLoggedIn && <LandingContainer />}
+      <LoginComponent show={!loggedIn} handleLogin={handleLogin} />
+      {loggedIn && <LandingContainer handleLogout={handleLogout} />}
     </>
   );
 }
