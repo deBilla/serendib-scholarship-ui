@@ -133,7 +133,7 @@ export default class ModalButton extends Component<any, any> {
 
   async handleFileUpload(file: any) {
     try {
-      const data = await fileUpload(
+      await fileUpload(
         BUCKET_NAME,
         file.name,
         this.props.type,

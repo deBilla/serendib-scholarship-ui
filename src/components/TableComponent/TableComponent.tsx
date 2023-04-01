@@ -6,6 +6,7 @@ import { useQueries } from "react-query";
 import { FaFileExcel, FaFileDownload } from "react-icons/fa";
 import * as XLSX from "xlsx";
 import { downloadBlobArrayToZip } from "../../utils/helper";
+import { useState, useEffect } from "react";
 
 const BUCKET_NAME = "serendib-ui";
 
@@ -35,9 +36,13 @@ const modalButtonStyle = {
 };
 
 export default function TableComponent(props: any) {
+  const [type, setType] = useState("student");
   const WS_URL = props.type === "student" ? STUDENT_URL : SPONSOR_URL;
   const arr = [props.type === "student" ? "student" : "sponsor", "sponsor"];
-  const type = props.type === "student" ? "student" : "sponsor";
+
+  useEffect(() => {
+    setType(props.type);
+  }, []);
 
   const apis: any[] = useQueries(
     arr.map((s: string) => {
@@ -141,7 +146,7 @@ export default function TableComponent(props: any) {
                 style={modalButtonStyle}
                 detail={props.row}
                 id={props.row.id}
-                type={props.type}
+                type={type}
                 editRowHandler={editRowHandler}
                 deleteRowHandler={deleteRowHandler}
                 sponsorArr={apis[1].data}
@@ -237,7 +242,7 @@ export default function TableComponent(props: any) {
             : columnData.sponsor.columns
         }
         rows={apis && apis[0] && apis[0].data ? apis[0].data : []}
-        type={props.type}
+        type={type}
       />
     </>
   );
