@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import ModalComponent from "../ModalComponent/ModalComponent";
 import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
-import { getSignedUrlForFile, fileUpload, deleteFolder } from "../../services/AWSConfig";
+import {
+  getSignedUrlForFile,
+  fileUpload,
+  deleteFolder,
+} from "../../services/AWSConfig";
 import { downloadBlobArrayToZip } from "../../utils/helper";
 
 const BUCKET_NAME = "serendib-ui";
@@ -87,9 +91,19 @@ export default class ModalButton extends Component<any, any> {
 
   async downloadFile(fileName: any) {
     try {
-      const signedUrl = await getSignedUrlForFile(BUCKET_NAME, fileName, `${this.props.type}/${this.props.id}`);
+      const signedUrl = await getSignedUrlForFile(
+        BUCKET_NAME,
+        fileName,
+        `${this.props.type}/${this.props.id}`
+      );
 
-      window.open(signedUrl);
+      const link = document.createElement("a");
+      link.href = signedUrl;
+      
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (e) {
       throw e;
     }
@@ -165,7 +179,10 @@ export default class ModalButton extends Component<any, any> {
   }
 
   async downloadFolder() {
-    await downloadBlobArrayToZip(BUCKET_NAME, `${this.props.type}/${this.props.id}`);
+    await downloadBlobArrayToZip(
+      BUCKET_NAME,
+      `${this.props.type}/${this.props.id}`
+    );
   }
 
   setShowDeleteConfirmation() {
@@ -190,7 +207,7 @@ export default class ModalButton extends Component<any, any> {
             onSave={() => this.saveData()}
             handleDelete={() => this.onDelete()}
             id={this.props.id}
-            downloadFolder={()=>this.downloadFolder()}
+            downloadFolder={() => this.downloadFolder()}
           />
         )}
 
