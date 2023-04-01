@@ -1,22 +1,11 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import ModalComponent from "../ModalComponent/ModalComponent";
-import {
-  S3Client,
-  PutObjectCommand,
-  GetObjectCommand,
-} from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
+import { getSignedUrlForFile, fileUpload } from "../../services/AWSConfig";
+import { downloadBlobArrayToZip } from "../../utils/helper";
 
-const REGION = "us-east-1";
-const s3Client = new S3Client({
-  region: REGION,
-  credentials: {
-    accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID as string,
-    secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY as string,
-  },
-});
+const BUCKET_NAME = "serendib-ui";
 
 export default class ModalButton extends Component<any, any> {
   constructor(props: any) {
@@ -97,17 +86,8 @@ export default class ModalButton extends Component<any, any> {
   }
 
   async downloadFile(fileName: any) {
-    const bucketParams = {
-      Bucket: "serendib-ui",
-      Key: fileName,
-      Body: "BODY",
-    };
-
     try {
-      const command = new GetObjectCommand(bucketParams);
-      const signedUrl = await getSignedUrl(s3Client, command, {
-        expiresIn: 3600,
-      });
+      const signedUrl = await getSignedUrlForFile(BUCKET_NAME, fileName);
 
       window.open(signedUrl);
     } catch (e) {
@@ -152,15 +132,14 @@ export default class ModalButton extends Component<any, any> {
   }
 
   async handleFileUpload(file: any) {
-    const bucketParams = {
-      Bucket: "serendib-ui",
-      Key: file["name"],
-      Body: file,
-    };
-
     try {
-      const data = await s3Client.send(new PutObjectCommand(bucketParams));
-      console.log(data);
+      const data = await fileUpload(
+        BUCKET_NAME,
+        file.name,
+        this.props.type,
+        this.props.id,
+        file
+      );
 
       let index = this.state.config.findIndex(
         (conf: any) => conf.label === "files"
@@ -176,11 +155,16 @@ export default class ModalButton extends Component<any, any> {
 
   onDelete() {
     this.setState({ showDeleteConfirmation: true });
+    this.downloadFolder();
   }
 
   handleDelete() {
     let row = this.createRow();
     this.props.deleteRowHandler(row);
+  }
+
+  async downloadFolder() {
+    await downloadBlobArrayToZip(BUCKET_NAME, `${this.props.type}/${this.props.id}`);
   }
 
   setShowDeleteConfirmation() {
@@ -205,6 +189,7 @@ export default class ModalButton extends Component<any, any> {
             onSave={() => this.saveData()}
             handleDelete={() => this.onDelete()}
             id={this.props.id}
+            downloadFolder={()=>this.downloadFolder()}
           />
         )}
 

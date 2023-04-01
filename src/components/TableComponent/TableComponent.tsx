@@ -3,8 +3,11 @@ import DataTableComponent from "../DataTableComponent/DataTableComponent";
 import ModalButton from "../../components/ModalButton/ModalButton";
 import axios from "axios";
 import { useQueries } from "react-query";
-import { FaFileExcel } from "react-icons/fa";
+import { FaFileExcel, FaFileDownload } from "react-icons/fa";
 import * as XLSX from "xlsx";
+import { downloadBlobArrayToZip } from "../../utils/helper";
+
+const BUCKET_NAME = "serendib-ui";
 
 const STUDENT_URL = process.env.REACT_APP_WS_HOST + "/student";
 const SPONSOR_URL = process.env.REACT_APP_WS_HOST + "/sponsor";
@@ -34,6 +37,7 @@ const modalButtonStyle = {
 export default function TableComponent(props: any) {
   const WS_URL = props.type === "student" ? STUDENT_URL : SPONSOR_URL;
   const arr = [props.type === "student" ? "student" : "sponsor", "sponsor"];
+  const type = props.type === "student" ? "student" : "sponsor";
 
   const apis: any[] = useQueries(
     arr.map((s: string) => {
@@ -89,7 +93,7 @@ export default function TableComponent(props: any) {
                 style={modalButtonStyle}
                 detail={props.row}
                 id={props.row.id}
-                type={props.type}
+                type={type}
                 editRowHandler={editRowHandler}
                 deleteRowHandler={deleteRowHandler}
                 sponsorArr={apis[1].data}
@@ -191,6 +195,10 @@ export default function TableComponent(props: any) {
     XLSX.writeFile(workbook, props.type + "-" + Date.now() + ".xlsx");
   };
 
+  const downloadAllFiles = async () => {
+    await downloadBlobArrayToZip(BUCKET_NAME, type);
+  }
+
   return (
     <>
       <div
@@ -214,6 +222,12 @@ export default function TableComponent(props: any) {
           onClick={handleExcelDownload}
         >
           <FaFileExcel />
+        </Button>
+        <Button
+          variant="warning"
+          onClick={downloadAllFiles}
+        >
+          <FaFileDownload />
         </Button>
       </div>
       <DataTableComponent
