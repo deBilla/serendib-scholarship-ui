@@ -3,6 +3,8 @@ import {
   PutObjectCommand,
   GetObjectCommand,
   ListObjectsCommand,
+  DeleteObjectsCommand,
+  DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 const REGION = "us-east-1";
@@ -53,10 +55,7 @@ const fileUpload = async (
   }
 };
 
-const getBlobArrayForFolder = async (
-  bucketName: string,
-  folderPath: string
-) => {
+const listFilesInFolder = async (bucketName: string, folderPath: string) => {
   const bucketParams = {
     Bucket: bucketName,
     Prefix: folderPath,
@@ -69,19 +68,51 @@ const getBlobArrayForFolder = async (
     return;
   }
 
+  return fileList.Contents;
+};
+
+const getBlobArrayForFolder = async (
+  bucketName: string,
+  folderPath: string
+) => {
+  const fileList = await listFilesInFolder(bucketName, folderPath);
+  const fileListArr = fileList ? fileList : [];
+
   const blobArr = [];
 
-  for (const file of fileList.Contents) {
+  for (const file of fileListArr) {
     const signedUrl = await getSignedUrlForFile(
       bucketName,
       file.Key ? file.Key : "undefined"
     );
     const response = await fetch(signedUrl);
     console.log(response);
-    blobArr.push({blob: response.blob(), name: file.Key});
+    blobArr.push({ blob: response.blob(), name: file.Key });
   }
 
   return blobArr;
 };
 
-export { getSignedUrlForFile, fileUpload, getBlobArrayForFolder };
+const deleteFolder = async (bucketName: string, folderPath: string) => {
+  const fileList = await listFilesInFolder(bucketName, folderPath);
+  const fileListArr = fileList ? fileList : [];
+  const objectsToDelete = fileListArr.map((object) => ({
+    Key: object.Key,
+  }));
+  if (objectsToDelete.length > 0) {
+    const deleteObjectsCommand = new DeleteObjectsCommand({
+      Bucket: bucketName,
+      Delete: { Objects: objectsToDelete },
+    });
+    await s3Client.send(deleteObjectsCommand);
+  }
+
+  // Delete the folder itself
+  const deleteFolderCommand = new DeleteObjectCommand({
+    Bucket: bucketName,
+    Key: folderPath,
+  });
+  await s3Client.send(deleteFolderCommand);
+};
+
+export { getSignedUrlForFile, fileUpload, getBlobArrayForFolder, deleteFolder };

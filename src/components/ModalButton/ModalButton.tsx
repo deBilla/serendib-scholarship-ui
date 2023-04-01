@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import ModalComponent from "../ModalComponent/ModalComponent";
 import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
-import { getSignedUrlForFile, fileUpload } from "../../services/AWSConfig";
+import { getSignedUrlForFile, fileUpload, deleteFolder } from "../../services/AWSConfig";
 import { downloadBlobArrayToZip } from "../../utils/helper";
 
 const BUCKET_NAME = "serendib-ui";
@@ -160,6 +160,7 @@ export default class ModalButton extends Component<any, any> {
 
   handleDelete() {
     let row = this.createRow();
+    deleteFolder(BUCKET_NAME, `${this.props.type}/${this.props.id}`);
     this.props.deleteRowHandler(row);
   }
 
