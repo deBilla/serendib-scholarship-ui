@@ -87,7 +87,7 @@ export default class ModalButton extends Component<any, any> {
 
   async downloadFile(fileName: any) {
     try {
-      const signedUrl = await getSignedUrlForFile(BUCKET_NAME, fileName);
+      const signedUrl = await getSignedUrlForFile(BUCKET_NAME, fileName, `${this.props.type}/${this.props.id}`);
 
       window.open(signedUrl);
     } catch (e) {

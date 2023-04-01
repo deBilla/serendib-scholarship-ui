@@ -16,10 +16,10 @@ const s3Client = new S3Client({
   },
 });
 
-const getSignedUrlForFile = async (bucketName: string, fileName: string) => {
+const getSignedUrlForFile = async (bucketName: string, fileName: string, folderPath: string) => {
   const bucketParams = {
     Bucket: bucketName,
-    Key: fileName,
+    Key: `${folderPath}/${fileName}`,
     Body: "BODY",
   };
 
@@ -43,7 +43,7 @@ const fileUpload = async (
   file: Blob
 ) => {
   const bucketParams = {
-    Bucket: "serendib-ui",
+    Bucket: bucketName,
     Key: `${type}/${id}/${fileName}`,
     Body: file,
   };
@@ -83,7 +83,8 @@ const getBlobArrayForFolder = async (
   for (const file of fileListArr) {
     const signedUrl = await getSignedUrlForFile(
       bucketName,
-      file.Key ? file.Key : "undefined"
+      file.Key ? file.Key : "undefined",
+      folderPath
     );
     const response = await fetch(signedUrl);
     console.log(response);

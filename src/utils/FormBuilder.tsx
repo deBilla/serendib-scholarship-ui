@@ -27,7 +27,7 @@ export const FormBuilder = (config: FormBuilderConfig[]) => {
             let children = [];
 
             for (let i = 0; i < arr.length; i++) {
-                children.push(<option key={i} onClick={config[val].onChange}>{arr[i]}</option>);
+                children.push(<option key={formKey++} onClick={config[val].onChange}>{arr[i]}</option>);
             }
 
             form.push(
@@ -55,7 +55,7 @@ export const FormBuilder = (config: FormBuilderConfig[]) => {
             for (let i = 0; i < arr.length; i++) {
                 form.push(
                     React.cloneElement(
-                        <Button key={i} onClick={config[val].onChange}>{arr[i]}</Button>
+                        <Button key={formKey++} onClick={config[val].onChange}>{arr[i]}</Button>
                     )
                 );
                 form.push(
