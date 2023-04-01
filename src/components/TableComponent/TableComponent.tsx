@@ -98,7 +98,7 @@ export default function TableComponent(props: any) {
                 style={modalButtonStyle}
                 detail={props.row}
                 id={props.row.id}
-                type={type}
+                type={'student'}
                 editRowHandler={editRowHandler}
                 deleteRowHandler={deleteRowHandler}
                 sponsorArr={apis[1].data}
@@ -146,7 +146,7 @@ export default function TableComponent(props: any) {
                 style={modalButtonStyle}
                 detail={props.row}
                 id={props.row.id}
-                type={type}
+                type={'sponsor'}
                 editRowHandler={editRowHandler}
                 deleteRowHandler={deleteRowHandler}
                 sponsorArr={apis[1].data}
