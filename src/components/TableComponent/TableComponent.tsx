@@ -91,6 +91,7 @@ export default function TableComponent(props: any) {
                 id={props.row.id}
                 type={props.type}
                 editRowHandler={editRowHandler}
+                deleteRowHandler={deleteRowHandler}
                 sponsorArr={apis[1].data}
               />
             );
@@ -138,6 +139,7 @@ export default function TableComponent(props: any) {
                 id={props.row.id}
                 type={props.type}
                 editRowHandler={editRowHandler}
+                deleteRowHandler={deleteRowHandler}
                 sponsorArr={apis[1].data}
               />
             );
@@ -165,6 +167,13 @@ export default function TableComponent(props: any) {
       .patch(`${WS_URL}?id=${row.id}`, {
         ...row,
       })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const deleteRowHandler = (row: any) => {
+    axios
+      .delete(`${WS_URL}?id=${row.id}`, {})
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };

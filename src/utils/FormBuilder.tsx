@@ -32,7 +32,7 @@ export const FormBuilder = (config: FormBuilderConfig[]) => {
 
             form.push(
                 React.cloneElement(
-                    <Form.Select key={formKey} />,
+                    <Form.Select style={{marginBottom: '10px'}} key={formKey} />,
                     config[val], children
                 )
             );
